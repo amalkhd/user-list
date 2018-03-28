@@ -1,16 +1,45 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-
+import { NavigateComponent } from "./user-list/navigate/navigate.component";
+import { UserDialogComponent } from "./user-list/dialog/user-dialog.component";
+import { MaterialModule } from "./material.module";
+import { ApiService } from "./services/api.service";
+import { UserListComponent } from "./user-list/user-list.component";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from "@angular/common/http";
+import { AppComponent } from "./app.component";
+const appRoutes: Routes = [
+  {
+    path: "users",
+    component: UserListComponent
+  },
+  {
+    path: "",
+    redirectTo: "users",
+    pathMatch: "full"
+  }
+];
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserListComponent,
+    UserDialogComponent,
+    NavigateComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MaterialModule
   ],
-  providers: [],
+  entryComponents: [UserDialogComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
