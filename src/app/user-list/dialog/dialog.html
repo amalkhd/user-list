@@ -1,0 +1,19 @@
+<div class="dialog-wrap">
+  <div class="wrap" *ngIf="user && !loading">
+    <img *ngIf="user.avatar_url" [src]="user.avatar_url" alt="" class="img-responsive">
+    <div class="content text-center">
+      <p class="f-16 med dark-text">{{user.name}}</p>
+      <p>
+        <a target="_blank" href="{{user.html_url}}">{{user.html_url}}</a>
+      </p>
+      <p>
+        <span class="bold dark-text f-15">Followers&nbsp;</span>
+        <span class="content-text">{{user.followers}}</span>
+      </p>
+      <p class="content-text mb-0">{{user.location}}</p>
+    </div>
+  </div>
+  <div class="spinner-wrap" *ngIf="loading">
+    <mat-progress-spinner class="spinner" [diameter]="50" strokeWidth="5" color="primary" mode="indeterminate"></mat-progress-spinner>
+  </div>
+</div>

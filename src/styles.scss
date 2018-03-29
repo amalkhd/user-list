@@ -1,0 +1,258 @@
+/* You can add global styles to this file, and also import other style files */
+
+$blue-grey: #eceff1;
+$black: black;
+$white: white;
+$dark-text: #212121;
+$content-dark: #424242;
+$cool-blue: #3f51b5;
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.main-body {
+  height: 100vh;
+  background-color: $blue-grey;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-80 {
+  margin-top: 80px;
+}
+
+.med {
+  font-weight: 500;
+}
+.bold {
+  font-weight: 700;
+}
+.light {
+  font-weight: 300;
+}
+.f-15 {
+  font-size: 15px;
+}
+
+.f-16 {
+  font-size: 16px;
+}
+.f-18 {
+  font-size: 18px;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.dark-text {
+  color: $dark-text;
+}
+
+.content-text {
+  color: $content-dark;
+}
+
+@mixin transition($transition) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+.table-wrap {
+  &.loading {
+    .table {
+      tr {
+        td {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+  min-height: 570px;
+  @extend .card;
+  .table {
+    margin-bottom: 0;
+    tr {
+      td {
+        opacity: 1;
+        transition: opacity 0.1s ease-out;
+        padding: 6px 8px;
+        letter-spacing: 0.5px;
+        color: $content-dark;
+        vertical-align: middle;
+        border-color: #eee;
+        ul {
+          margin-bottom: 0;
+          li {
+            padding: 4px 8px;
+            border-radius: 100%;
+            cursor: pointer;
+            @include transition(all 0.2s ease-in);
+            background-color: lighten($blue-grey, 100%);
+            &:hover {
+              background-color: lighten(#616161, 55%);
+            }
+            i {
+              font-size: 20px;
+              position: relative;
+              top: 2px;
+              color: #616161;
+            }
+          }
+        }
+      }
+      &:first-of-type {
+        td {
+          border: none;
+        }
+      }
+      th {
+        padding: 6px 8px;
+        color: $dark-text;
+        border: none;
+        vertical-align: middle;
+        letter-spacing: 0.5px;
+        span {
+          display: inline-block;
+          @extend .placeholder;
+          input {
+            margin-left: 10px;
+
+            &.form-control {
+              box-shadow: none;
+              font-weight: 400;
+              max-width: 120px;
+              &:focus {
+                border-color: $cool-blue;
+              }
+            }
+          }
+          &.filter {
+            cursor: pointer;
+            &:hover {
+              color: $cool-blue;
+            }
+            i {
+              line-height: 12px;
+              position: relative;
+              top: 4px;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.box-shadow {
+  -webkit-box-shadow: 0 0 10px darken($blue-grey, 10%);
+  -o-box-shadow: 0 0 10px darken($blue-grey, 10%);
+  -moz-box-shadow: 0 0 10px darken($blue-grey, 10%);
+  box-shadow: 0 0 10px darken($blue-grey, 10%);
+}
+
+.placeholder {
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  :-moz-placeholder {
+    /* Firefox 18- */
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+}
+
+.card {
+  padding: 5px 20px;
+  border-radius: 6px;
+  @extend .box-shadow;
+  background-color: $white;
+}
+
+.user-dialog {
+  .mat-dialog-container {
+    border-radius: 6px;
+  }
+}
+.dialog-wrap {
+  min-height: 213px;
+  position: relative;
+  img {
+    width: 80px;
+    border-radius: 100%;
+    margin: 0 auto;
+  }
+  .content {
+    margin-top: 20px;
+    a {
+      color: $cool-blue;
+      &:hover {
+        text-decoration: underline;
+      }
+      &:focus {
+        outline: 0;
+        text-decoration: none;
+      }
+    }
+  }
+  .spinner-wrap {
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .spinner {
+      margin: 0 auto;
+    }
+  }
+}
+
+.nav-wrap {
+  margin: 10px 0;
+  .btn {
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+.sidebar {
+  height: 100vh;
+  background-color: darken($blue-grey, 50%);
+}
+
+.card.user-edit {
+  padding: 25px 20px;
+  button {
+    box-shadow: none;
+  }
+}
