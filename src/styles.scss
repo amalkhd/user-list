@@ -238,6 +238,11 @@ body {
 
 .nav-wrap {
   margin: 10px 0;
+  ul {
+    li {
+      padding: 0;
+    }
+  }
   .btn {
     &:focus {
       outline: 0;

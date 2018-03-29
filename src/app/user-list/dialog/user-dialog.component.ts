@@ -20,7 +20,9 @@ export class UserDialogComponent implements OnInit {
 
   getCurrentUser() {
     this.loading = true;
-    this.apiService.getData("users/" + this.data, {}).subscribe(res => {
+    let name: any = {};
+    name = this.data["name"];
+    this.apiService.getData("users/" + name, {}).subscribe(res => {
       console.log(res);
       if (res) {
         this.user = res;

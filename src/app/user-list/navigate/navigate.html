@@ -1,6 +1,15 @@
 <div class="col-xs-12">
   <div class="nav-wrap text-right">
-    <button [disabled]="isNav == 0" class="btn btn-default" (click)="navigate('prev')">Prev</button>
-    <button class="btn btn-default" (click)="navigate('next')">Next</button>
+    <ul class="list-inline">
+      <li>
+        <button [disabled]="pageData.currentPage == 1" (click)="prevPage()" class="btn btn-default">Prev</button>
+      </li>
+      <li *ngFor="let item of paginate">
+        <button *ngIf="show(item.value)" [class.active]="pageData.currentPage == item.value" class="btn btn-default" (click)="navigate(item.page, item.value)">{{item.value}}</button>
+      </li>
+      <li>
+        <button [disabled]="pageData.currentPage == pageData.totalPage" (click)="nextPage()" class="btn btn-default">Next</button>
+      </li>
+    </ul>
   </div>
 </div>

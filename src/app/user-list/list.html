@@ -1,6 +1,6 @@
 <div class="row">
 
-  <div class="col-md-8 mt-40">
+  <div class="col-md-8 mt-40 col-md-offset-2 mt-40">
     <div class="table-wrap" [class.loading]="users.loading">
       <table class="table">
         <tr>
@@ -9,6 +9,10 @@
             <span class="filter" (click)="sortById()">
               <i class="material-icons">sort</i>
             </span>
+            <span>
+              <input type="number" class="form-control" [(ngModel)]="query.id" name="query" (ngModelChange)="filterById($event)" placeholder="search">
+            </span>
+
           </th>
           <th>
             <span>Users</span>
@@ -17,7 +21,7 @@
             </span>
 
             <span>
-              <input type="text" class="form-control" [(ngModel)]="query" name="query" (ngModelChange)="filterSearch($event)" placeholder="search">
+              <input type="text" class="form-control" [(ngModel)]="query.name" name="query" (ngModelChange)="filterSearch($event)" placeholder="search">
             </span>
           </th>
           <th>
@@ -29,10 +33,10 @@
           <td>{{user.login}}</td>
           <td>
             <ul class="list-inline">
-              <li (click)="editUser(user.login)">
+              <li (click)="openDialog(user.login, true)">
                 <i class="material-icons">create</i>
               </li>
-              <li (click)="openDialog(user.login)">
+              <li (click)="openDialog(user.login , false)">
                 <i class="material-icons">visibility</i>
               </li>
               <li (click)="deleteUser(i)">
@@ -43,23 +47,8 @@
         </tr>
       </table>
       <div class="row">
-        <app-navigate [isNav]="users.since" (onNavigate)="onNavigate($event)"></app-navigate>
+        <app-navigate [perPage]="users.per_page" [total]="users.total" [isNav]="users.since" (onNavigate)="onNavigate($event)"></app-navigate>
       </div>
-    </div>
-  </div>
-  <div class="col-md-3 mt-40">
-    <div class="card user-edit" *ngIf="users.userData">
-      <p class="f-16 bold dark-text">{{users.userData.login}}</p>
-      <form>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Name" value="{{users.userData.name}}">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Location" value="{{users.userData.location}}">
-        </mat-form-field>
-        <button mat-raised-button color="primary">Update</button>
-        <button mat-button (click)="users.userData = null ">Close</button>
-      </form>
     </div>
   </div>
 </div>

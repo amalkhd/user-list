@@ -6,28 +6,28 @@ import { MatDialog } from "@angular/material";
   templateUrl: "list.html"
 })
 export class UserListComponent implements OnInit {
-<<<<<<< HEAD
   users: any = {};
-  query: any;
-=======
-  users = [];
->>>>>>> 50a8e396e78732be015ffd72138d306138587aae
+  query: any = {};
+  params: any = {};
   constructor(private userService: ApiService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.getUsers();
     this.users["toggleId"] = false;
     this.users["toggleName"] = false;
     this.users["since"] = 0;
+    this.query["name"] = "";
+    this.query["id"] = null;
+    this.users["total"] = 100;
+    this.users["per_page"] = 10;
+    this.getUsers();
   }
 
   getUsers() {
     this.users["loading"] = true;
     let param: any = {};
     param["since"] = this.users["since"];
-    param["per_page"] = 10;
+    param["per_page"] = this.users["per_page"];
     this.userService.getData("users", param).subscribe(res => {
-      console.log(res);
       if (res) {
         this.users["data"] = res;
         this.users["newData"] = res;
@@ -38,9 +38,17 @@ export class UserListComponent implements OnInit {
 
   filterSearch(ev) {
     console.log(ev);
-    this.users["newData"] = this.users["data"].filter(function(el) {
+    this.users["newData"] = this.users["data"].filter(el => {
       return el.login.toLowerCase().indexOf(ev.toLowerCase()) > -1;
     });
+  }
+
+  filterById(ev) {
+    if (ev) {
+      this.users["newData"] = this.users["data"].filter(el => el.id === ev);
+    } else {
+      this.users["newData"] = this.users["data"];
+    }
   }
 
   sortById() {
@@ -71,23 +79,17 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  openDialog(name: string) {
+  openDialog(name: string, isEdit: boolean) {
     let dialogRef = this.dialog.open(UserDialogComponent, {
       width: "250px",
-      data: name,
+      data: { name: name, edit: isEdit },
       panelClass: "user-dialog"
     });
   }
 
   onNavigate(ev) {
-    console.log(ev);
-    if (ev == "next") {
-      this.users["since"] = this.users["since"] + 10;
-      this.getUsers();
-    } else {
-      this.users["since"] = this.users["since"] - 10;
-      this.getUsers();
-    }
+    this.users["since"] = ev;
+    this.getUsers();
   }
 
   getUserDetails() {
