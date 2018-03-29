@@ -6,8 +6,12 @@ import { MatDialog } from "@angular/material";
   templateUrl: "list.html"
 })
 export class UserListComponent implements OnInit {
+<<<<<<< HEAD
   users: any = {};
   query: any;
+=======
+  users = [];
+>>>>>>> 50a8e396e78732be015ffd72138d306138587aae
   constructor(private userService: ApiService, public dialog: MatDialog) {}
 
   ngOnInit() {
